@@ -11,6 +11,9 @@ function todosReducer(state, action) {
   switch (action.type) {
     case 'ADD_TODO':
       return [...state, action.payload];
+    case 'DELETE_TODO':
+      console.log('delete', action.payload);
+      return state.filter(({ id }) => id !== action.payload);
     default:
       console.error('type not found');
   }
@@ -33,7 +36,7 @@ function Todo() {
     // pagaminti todo obj
     // ideti i todos su dispach
     const newTodoObj = {
-      id: 4,
+      id: 5,
       value: newInputVal,
       done: false,
       date: new Date().toLocaleTimeString(),
@@ -67,7 +70,14 @@ function Todo() {
         {/* <TodoItem item={item} */}
         {state.map((tObj) => (
           <li key={tObj.id}>
-            {tObj.value} <button>delete</button>
+            {tObj.value}{' '}
+            <button
+              onClick={() =>
+                dispatch({ type: 'DELETE_TODO', payload: tObj.id })
+              }
+            >
+              delete
+            </button>
           </li>
         ))}
       </ul>
