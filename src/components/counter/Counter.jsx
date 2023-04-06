@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Card from './../ui/card/Card';
 import { useState } from 'react';
 
-const initState = { value: 0 };
+const initState = { value: 0, title: 'Apples' };
 
 // reducerio funkcija. komponento veiksmu logika ir eiga.
 // turi grazinti state busena kokia turi po pakeitimu
@@ -14,16 +14,16 @@ function counterReducer(state, action) {
 
   switch (action.type) {
     case 'UP':
-      return { value: state.value + 1 };
+      return { ...state, value: state.value + 1 };
     case 'UP_BY':
-      return { value: state.value + action.payload };
+      return { ...state, value: state.value + action.payload };
     case 'DOWN':
       // jei reikme taps neigiama nemazinam
       if (state.value - 1 < 0) {
         console.log('gausim neigiama');
-        return { value: 0 };
+        return initState;
       }
-      return { value: state.value - 1 };
+      return { ...state, value: state.value - 1 };
     case 'RESET':
       return initState;
     default:
@@ -63,7 +63,7 @@ function Counter() {
 
   return (
     <Card>
-      <h2>Counter</h2>
+      <h2>{state.title}</h2>
       <Value green={arGreen}>{state?.value}</Value>
       <div className="control">
         <button onClick={handleUp}>Up</button>
