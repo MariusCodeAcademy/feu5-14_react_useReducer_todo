@@ -1,12 +1,14 @@
 import './styles/reset.css';
 import './styles/App.css';
 import Counter from './components/counter/Counter';
+import Todo from './components/todo/Todo';
 
 function App() {
   return (
     <div className="container">
       <h1>Let useReducer</h1>
-      <Counter />
+      {/* <Counter /> */}
+      <Todo />
     </div>
   );
 }
