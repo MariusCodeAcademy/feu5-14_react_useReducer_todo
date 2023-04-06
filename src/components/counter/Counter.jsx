@@ -4,22 +4,22 @@ import Card from './../ui/card/Card';
 import { useState } from 'react';
 
 function Counter() {
-  const [value, setValue] = useState(0);
+  const [state, setValue] = useState({ value: 0 });
 
   // fn handleUp
   function handleUp() {
-    setValue(value + 1);
+    setValue({ value: state.value + 1 });
   }
 
   // fn hadnleDown
   function hadnleDown() {
-    setValue(value - 1);
+    setValue({ value: state.value - 1 });
   }
 
   return (
     <Card>
       <h2>Counter</h2>
-      <Value>{value}</Value>
+      <Value>{state.value}</Value>
       <div className="control">
         <button onClick={handleUp}>Up</button>
         <button onClick={hadnleDown}>Down</button>
