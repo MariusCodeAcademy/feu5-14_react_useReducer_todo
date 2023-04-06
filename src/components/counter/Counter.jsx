@@ -11,10 +11,18 @@ function counterReducer(state, action) {
   console.log('counterReducer ivyko');
   console.log('state ===', state);
   console.log('action ===', action);
-  if (action.type === 'UP') {
-    return { value: state.value + 1 };
-  } else if (action.type === 'DOWN') {
-    return { value: state.value - 1 };
+
+  switch (action.type) {
+    case 'UP':
+      return { value: state.value + 1 };
+    case 'UP_BY':
+      return { value: state.value + action.payload };
+    case 'DOWN':
+      return { value: state.value - 1 };
+    case 'RESET':
+      return initState;
+    default:
+      throw new Error('nera tokio dispach type');
   }
 }
 
@@ -27,6 +35,12 @@ function Counter() {
     dispach({ type: 'UP' });
   }
 
+  function handleUpBy(howMuch) {
+    // setValue({ value: state.value + 1 });
+    dispach({ type: 'UP_BY', payload: howMuch });
+    // { type: 'UP_BY' } === action counterReducer funkcijoje
+  }
+
   // fn hadnleDown
   function hadnleDown() {
     // setValue({ value: state.value - 1 });
@@ -34,6 +48,9 @@ function Counter() {
   }
 
   // fn handleReset()
+  function handleReset() {
+    dispach({ type: 'RESET' });
+  }
   // padaryti kad reset nunulintu value
 
   return (
@@ -43,7 +60,8 @@ function Counter() {
       <div className="control">
         <button onClick={handleUp}>Up</button>
         <button onClick={hadnleDown}>Down</button>
-        <button onClick={hadnleDown}>Reset</button>
+        <button onClick={handleReset}>Reset</button>
+        <button onClick={() => handleUpBy(5)}>Up by 5</button>
       </div>
     </Card>
   );
