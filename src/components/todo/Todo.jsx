@@ -1,9 +1,10 @@
 import React, { useReducer, useState } from 'react';
 
 const initTodos = [
-  { id: 1, value: 'Buy Eggs', done: false, date: '' },
-  { id: 2, value: 'Go to Shopping', done: true, date: '' },
-  { id: 3, value: 'Do a 100 pushups', done: false, date: '' },
+  { id: 1, value: 'Learn React', done: false, date: '' },
+  { id: 2, value: 'Make a website', done: true, date: '' },
+  { id: 3, value: 'Debug a bug', done: false, date: '' },
+  { id: 4, value: 'Refactor spaghetti code', done: false, date: '' },
 ];
 
 function todosReducer(state, action) {
@@ -18,7 +19,7 @@ function todosReducer(state, action) {
 function Todo() {
   const [state, dispatch] = useReducer(todosReducer, initTodos);
   const [newInputVal, setNewInputVal] = useState('');
-  console.log('state ===', state);
+  // console.log('state ===', state);
   /* Tasks
   // sukurti useReducer() fn
   // atvaizduoti sarasa is state
