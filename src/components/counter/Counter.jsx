@@ -18,6 +18,11 @@ function counterReducer(state, action) {
     case 'UP_BY':
       return { value: state.value + action.payload };
     case 'DOWN':
+      // jei reikme taps neigiama nemazinam
+      if (state.value - 1 < 0) {
+        console.log('gausim neigiama');
+        return { value: 0 };
+      }
       return { value: state.value - 1 };
     case 'RESET':
       return initState;
@@ -53,10 +58,13 @@ function Counter() {
   }
   // padaryti kad reset nunulintu value
 
+  // kada green turi buti true?
+  const arGreen = state?.value > 5;
+
   return (
     <Card>
       <h2>Counter</h2>
-      <Value>{state?.value}</Value>
+      <Value green={arGreen}>{state?.value}</Value>
       <div className="control">
         <button onClick={handleUp}>Up</button>
         <button onClick={hadnleDown}>Down</button>
@@ -70,6 +78,7 @@ function Counter() {
 const Value = styled.p`
   font-size: 50px;
   font-weight: normal;
+  color: ${(props) => (props.green ? 'green' : '#000')};
 `;
 
 export default Counter;
