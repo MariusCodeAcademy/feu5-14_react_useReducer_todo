@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import styled from 'styled-components';
 import Card from './../ui/card/Card';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const initState = { value: 0, title: 'Apples' };
 
@@ -13,6 +13,8 @@ function counterReducer(state, action) {
   console.log('action ===', action);
 
   switch (action.type) {
+    case 'EDIT_TITLE':
+      return { ...state, title: action.payload };
     case 'UP':
       return { ...state, value: state.value + 1 };
     case 'UP_BY':
@@ -61,6 +63,10 @@ function Counter() {
   // kada green turi buti true?
   const arGreen = state?.value > 5;
 
+  function handleTitleChange(e) {
+    dispach({ type: 'EDIT_TITLE', payload: e.target.value });
+  }
+
   return (
     <Card>
       <h2>{state.title}</h2>
@@ -71,6 +77,12 @@ function Counter() {
         <button onClick={handleReset}>Reset</button>
         <button onClick={() => handleUpBy(5)}>Up by 5</button>
       </div>
+      <input
+        value={state.title}
+        onChange={handleTitleChange}
+        type="text"
+        placeholder="title"
+      />
     </Card>
   );
 }
